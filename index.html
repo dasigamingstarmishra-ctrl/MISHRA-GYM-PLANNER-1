@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Mishra Gym Planner</title>
+<style>
+:root{--bg:#07090b;--card:#11151a;--card2:#171c22;--lime:#b8ff00;--lime2:#78d900;--purple:#8d38ff;--orange:#ff8a00;--muted:#9ba3ad;--line:#252b33}
+*{box-sizing:border-box}body{margin:0;background:#020304;color:#fff;font-family:Inter,Arial,sans-serif}
+.app{max-width:480px;min-height:100vh;margin:auto;background:radial-gradient(circle at 85% 0,#1d2b09 0,transparent 28%),var(--bg);padding-bottom:82px}
+header{padding:20px 18px 12px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:24px;font-weight:900;letter-spacing:-1px}.brand span{color:var(--lime)}.bell{font-size:22px}
+main{padding:8px 16px}.screen{display:none}.screen.active{display:block}
+.hello{color:var(--muted);font-size:13px}.hero{margin:8px 0 15px}.hero h1{font-size:27px;margin:3px 0}.hero p{margin:0;color:var(--muted)}
+.card{background:linear-gradient(145deg,#151a20,#0e1115);border:1px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 12px 35px #0008}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:#171c21;border-radius:15px;padding:13px;border:1px solid #242b32}.ico{font-size:21px}.small{font-size:11px;color:var(--muted);margin-top:5px}.big{font-size:21px;font-weight:900;margin-top:2px}
+.sectiontitle{display:flex;justify-content:space-between;align-items:center;margin:18px 2px 8px}.sectiontitle h2{font-size:17px;margin:0}.sectiontitle span{font-size:11px;color:var(--lime)}
+.workout{background:linear-gradient(115deg,#24143b,#101318);border:1px solid #48216d;border-radius:20px;padding:16px;position:relative;overflow:hidden}.workout:after{content:"🏋️";position:absolute;right:-5px;bottom:-16px;font-size:88px;opacity:.16}.pill{display:inline-block;background:#b8ff0019;color:var(--lime);padding:6px 9px;border-radius:9px;font-size:11px;font-weight:700}.workout h3{margin:12px 0 5px}.muted{color:var(--muted)}
+.btn{width:100%;border:0;border-radius:13px;padding:13px;background:var(--lime);color:#081000;font-weight:900;font-size:14px;margin-top:12px}.btn.dark{background:#20262d;color:#fff;border:1px solid #323941}
+.exercise{display:flex;align-items:center;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border:0}.exicon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#2d3c0c,#151b13);font-size:20px}.exname{font-weight:700;font-size:14px}.exmeta{font-size:11px;color:var(--muted);margin-top:4px}.check{margin-left:auto;color:var(--lime)}
+.meal{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.meal:last-child{border:0}.food{width:55px;height:55px;border-radius:14px;display:grid;place-items:center;font-size:27px;background:linear-gradient(135deg,#34210b,#17130c)}.meal h4{margin:2px 0 5px}.meal p{margin:0;color:var(--muted);font-size:11px}
+.form label{display:block;font-size:12px;color:var(--muted);margin-top:9px}.form input,.form select{width:100%;padding:12px;border-radius:11px;border:1px solid #343b44;background:#0a0d10;color:#fff;margin-top:5px}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.goal{padding:12px 5px;text-align:center;border:1px solid #343b44;border-radius:13px;font-size:11px}.goal.selected{border-color:var(--lime);background:#b8ff0014;color:var(--lime)}
+.progressbar{height:9px;background:#252b31;border-radius:20px;overflow:hidden}.progressbar i{display:block;height:100%;width:72%;background:linear-gradient(90deg,var(--lime),#eaff9b);border-radius:20px}
+.chart{height:130px;display:flex;align-items:end;gap:8px;padding:15px 4px 5px}.bar{flex:1;background:linear-gradient(#b8ff00,#345600);border-radius:7px 7px 2px 2px}.ach{display:flex;align-items:center;gap:12px;padding:11px 0}.badge{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#5c1a99,#a64dff)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#0d1014eF;backdrop-filter:blur(16px);border-top:1px solid #252b33;padding:8px 4px;z-index:10}
+nav button{border:0;background:none;color:#7e8791;font-size:10px;font-weight:700;padding:5px 0}nav button b{display:block;font-size:20px;margin-bottom:3px}nav button.active{color:var(--lime)}
+.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:#b8ff00;color:#071000;padding:10px 16px;border-radius:12px;font-weight:800;font-size:12px;display:none;z-index:20}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><span>MISHRA</span> GYM PLANNER</div><div class="bell">🔔</div></header>
+<div id="toast" class="toast"></div>
+<main>
+
+<section id="home" class="screen active">
+<div class="hero"><div class="hello">GOOD MORNING, SAJAN 💪</div><h1>Ready to crush your goals?</h1><p>Your body. Your plan. Your best version.</p></div>
+<div class="card"><div class="sectiontitle"><h2>Today's Overview</h2><span>LIVE</span></div><div class="stats">
+<div class="stat"><div class="ico">🔥</div><div class="small">CALORIES</div><div class="big" id="cal">2,000</div></div>
+<div class="stat"><div class="ico">💪</div><div class="small">PROTEIN</div><div class="big" id="protein">130g</div></div>
+<div class="stat"><div class="ico">💧</div><div class="small">WATER</div><div class="big">2.5L</div></div>
+<div class="stat"><div class="ico">👟</div><div class="small">STEPS</div><div class="big">8,432</div></div>
+</div></div>
+<div class="sectiontitle"><h2>Today's Workout</h2><span>60 MIN</span></div>
+<div class="workout"><span class="pill">CHEST + TRICEPS</span><h3>🔥 Push Day</h3><div class="muted">5 exercises • Intermediate</div><button class="btn" onclick="startWorkout()">START WORKOUT ▶</button></div>
+<div class="sectiontitle"><h2>Today's Diet</h2><span>HIGH PROTEIN</span></div>
+<div class="card">
+<div class="meal"><div class="food">🥣</div><div><h4>Breakfast</h4><p>Oats + milk + banana + nuts • 520 kcal</p></div></div>
+<div class="meal"><div class="food">🍛</div><div><h4>Lunch</h4><p>Rice + paneer/soya + curd + salad • 650 kcal</p></div></div>
+<div class="meal"><div class="food">🍎</div><div><h4>Snack</h4><p>Fruit + roasted chana • 220 kcal</p></div></div>
+<div class="meal"><div class="food">🥗</div><div><h4>Dinner</h4><p>Dal + roti + vegetables • 520 kcal</p></div></div>
+</div>
+</section>
+
+<section id="workout" class="screen">
+<div class="hero"><div class="hello">WORKOUT PLAN</div><h1>Push Day 🔥</h1><p>Chest • Shoulders • Triceps</p></div>
+<div class="card">
+<div class="exercise"><div class="exicon">🏋️</div><div><div class="exname">Barbell Bench Press</div><div class="exmeta">4 sets × 8–12 reps • Rest 90 sec</div></div><div class="check">✓</div></div>
+<div class="exercise"><div class="exicon">💪</div><div><div class="exname">Incline Dumbbell Press</div><div class="exmeta">3 sets × 10–12 reps • Rest 60 sec</div></div><div class="check">✓</div></div>
+<div class="exercise"><div class="exicon">🔥</div><div><div class="exname">Shoulder Press</div><div class="exmeta">3 sets × 8–12 reps • Rest 90 sec</div></div><div class="check">✓</div></div>
+<div class="exercise"><div class="exicon">⚡</div><div><div class="exname">Lateral Raise</div><div class="exmeta">3 sets × 12–15 reps • Rest 45 sec</div></div><div class="check">✓</div></div>
+<div class="exercise"><div class="exicon">💥</div><div><div class="exname">Triceps Pushdown</div><div class="exmeta">3 sets × 10–15 reps • Rest 45 sec</div></div><div class="check">✓</div></div>
+<button class="btn" onclick="startWorkout()">START SESSION</button>
+</div></section>
+
+<section id="diet" class="screen">
+<div class="hero"><div class="hello">NUTRITION</div><h1>Your Diet Plan 🍎</h1><p>Personalized around your goal</p></div>
+<div class="card"><div class="stats"><div class="stat"><div class="small">CALORIES</div><div class="big" id="cal2">2,000</div></div><div class="stat"><div class="small">PROTEIN</div><div class="big" id="protein2">130g</div></div></div></div>
+<div class="card"><h2>Meal Plan</h2>
+<div class="meal"><div class="food">🥣</div><div><h4>Breakfast</h4><p>100g oats • 250ml milk • banana • 10g nuts</p></div></div>
+<div class="meal"><div class="food">🍚</div><div><h4>Lunch</h4><p>200g cooked rice • 150g paneer/soya • 100g curd • salad</p></div></div>
+<div class="meal"><div class="food">🥜</div><div><h4>Evening Snack</h4><p>Roasted chana • fruit • lemon water</p></div></div>
+<div class="meal"><div class="food">🥗</div><div><h4>Dinner</h4><p>Dal • 2–3 roti • mixed vegetables</p></div></div>
+</div></section>
+
+<section id="progress" class="screen">
+<div class="hero"><div class="hello">YOUR PROGRESS</div><h1>Keep Going 📈</h1><p>Small steps. Big changes.</p></div>
+<div class="card"><div class="sectiontitle"><h2>Weight</h2><span id="weightText">63.0 kg</span></div><div class="chart"><i class="bar" style="height:92%"></i><i class="bar" style="height:82%"></i><i class="bar" style="height:76%"></i><i class="bar" style="height:70%"></i><i class="bar" style="height:61%"></i><i class="bar" style="height:55%"></i><i class="bar" style="height:48%"></i></div><button class="btn" onclick="updateWeight()">＋ ADD WEIGHT</button></div>
+<div class="card"><h2>🏆 Achievements</h2><div class="ach"><div class="badge">🔥</div><div><b>7 Day Streak</b><div class="small">Completed 7 days</div></div></div><div class="ach"><div class="badge">💧</div><div><b>Water Master</b><div class="small">Hit your water target</div></div></div><div class="ach"><div class="badge">💪</div><div><b>Protein Target</b><div class="small">Hit protein goal</div></div></div></div>
+</section>
+
+<section id="profile" class="screen">
+<div class="hero"><div class="hello">PROFILE SETUP</div><h1>Build Your Plan 👤</h1><p>Tell us about yourself</p></div>
+<div class="card form"><label>NAME</label><input id="name" placeholder="Your name"><label>AGE</label><input id="age" type="number" placeholder="22"><label>HEIGHT (CM)</label><input id="height" type="number" placeholder="163"><label>WEIGHT (KG)</label><input id="weight" type="number" placeholder="63"><label>FITNESS LEVEL</label><select id="level"><option>Beginner</option><option selected>Intermediate</option><option>Advanced</option></select><label>YOUR GOAL</label><div class="goals"><div class="goal selected" onclick="pickGoal(this,'recomp')">🔄<br>Recomp</div><div class="goal" onclick="pickGoal(this,'loss')">🔥<br>Fat Loss</div><div class="goal" onclick="pickGoal(this,'gain')">💪<br>Muscle Gain</div></div><button class="btn" onclick="saveProfile()">GENERATE MY PLAN ⚡</button></div>
+</section>
+</main>
+<nav>
+<button class="active" onclick="go('home',this)"><b>⌂</b>Home</button>
+<button onclick="go('workout',this)"><b>🏋</b>Workout</button>
+<button onclick="go('diet',this)"><b>🥗</b>Diet</button>
+<button onclick="go('progress',this)"><b>📈</b>Progress</button>
+<button onclick="go('profile',this)"><b>👤</b>Profile</button>
+</nav>
+</div>
+<script>
+let selectedGoal='recomp';
+function go(id,b){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');window.scrollTo(0,0)}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+function startWorkout(){toast('Workout session started! 💪')}
+function pickGoal(el,g){document.querySelectorAll('.goal').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');selectedGoal=g}
+function saveProfile(){
+let age=+document.getElementById('age').value||22,h=+document.getElementById('height').value||163,w=+document.getElementById('weight').value||63;
+let bmr=10*w+6.25*h-5*age+5;let cal=Math.round(bmr*1.55+(selectedGoal==='loss'?-300:selectedGoal==='gain'?250:0));let p=Math.round(w*(selectedGoal==='gain'?2:1.8));
+document.getElementById('cal').textContent=cal.toLocaleString();document.getElementById('cal2').textContent=cal.toLocaleString();document.getElementById('protein').textContent=p+'g';document.getElementById('protein2').textContent=p+'g';document.getElementById('weightText').textContent=w.toFixed(1)+' kg';
+localStorage.setItem('mgp',JSON.stringify({age,h,w,cal,p,goal:selectedGoal,name:document.getElementById('name').value||'Sajan'}));toast('Personalized plan created ⚡');go('home',document.querySelector('nav button'));
+}
+function updateWeight(){let old=localStorage.getItem('mgp');let w=prompt('Enter current weight (kg)',document.getElementById('weightText').textContent.replace(' kg',''));if(w){document.getElementById('weightText').textContent=(+w).toFixed(1)+' kg';toast('Progress saved! 📈')}}
+(function(){let d=localStorage.getItem('mgp');if(d){let x=JSON.parse(d);document.getElementById('cal').textContent=x.cal.toLocaleString();document.getElementById('cal2').textContent=x.cal.toLocaleString();document.getElementById('protein').textContent=x.p+'g';document.getElementById('protein2').textContent=x.p+'g';document.getElementById('weightText').textContent=(+x.w).toFixed(1)+' kg'}})();
+</script>
+</body>
+</html>
