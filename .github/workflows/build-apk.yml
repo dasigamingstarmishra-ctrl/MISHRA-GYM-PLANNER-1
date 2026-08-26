@@ -1,10 +1,10 @@
 name: Build Mishra Gym Planner APK
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -27,9 +26,8 @@ jobs:
 
       - name: Install Android SDK packages
         run: |
-          sdkmanager "platform-tools"
-          sdkmanager "platforms;android-35"
-          sdkmanager "build-tools;35.0.0"
+          yes | sdkmanager --licenses || true
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Create Android project folders
         run: |
@@ -69,8 +67,15 @@ jobs:
         run: |
           cat > build.gradle <<'EOF'
           plugins {
-              id 'com.android.application' version '8.6.1' apply false
+              id 'com.android.application' version '8.7.3' apply false
           }
+          EOF
+
+      - name: Create gradle.properties
+        run: |
+          cat > gradle.properties <<'EOF'
+          org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
+          android.useAndroidX=true
           EOF
 
       - name: Create app build.gradle
@@ -85,17 +90,11 @@ jobs:
               compileSdk 35
 
               defaultConfig {
-                  applicationId 'com.mishragym.planner'
+                  applicationId "com.mishragym.planner"
                   minSdk 23
                   targetSdk 35
                   versionCode 1
-                  versionName '1.0'
-              }
-
-              buildTypes {
-                  release {
-                      minifyEnabled false
-                  }
+                  versionName "1.0"
               }
           }
           EOF
@@ -103,14 +102,12 @@ jobs:
       - name: Create AndroidManifest.xml
         run: |
           cat > app/src/main/AndroidManifest.xml <<'EOF'
-          <?xml version="1.0" encoding="utf-8"?>
-
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
               <application
-                  android:allowBackup="true"
-                  android:label="Mishra Gym Planner"
                   android:theme="@style/AppTheme"
+                  android:label="Mishra Gym Planner"
+                  android:allowBackup="true"
                   android:supportsRtl="true">
 
                   <activity
@@ -129,39 +126,17 @@ jobs:
           </manifest>
           EOF
 
-      - name: Create colors.xml
-        run: |
-          cat > app/src/main/res/values/colors.xml <<'EOF'
-          <?xml version="1.0" encoding="utf-8"?>
-
-          <resources>
-              <color name="black">#000000</color>
-              <color name="white">#FFFFFF</color>
-              <color name="gym_red">#FF1744</color>
-              <color name="gym_dark">#101010</color>
-              <color name="gym_card">#1E1E1E</color>
-              <color name="gym_green">#00E676</color>
-          </resources>
-          EOF
-
       - name: Create styles.xml
         run: |
           cat > app/src/main/res/values/styles.xml <<'EOF'
-          <?xml version="1.0" encoding="utf-8"?>
-
           <resources>
-
-              <style name="AppTheme"
-                  parent="android:style/Theme.Material.Light.NoActionBar">
-
+              <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
                   <item name="android:fontFamily">sans</item>
-                  <item name="android:colorAccent">#FF1744</item>
-                  <item name="android:navigationBarColor">#101010</item>
-                  <item name="android:statusBarColor">#101010</item>
-                  <item name="android:windowLightStatusBar">false</item>
-
+                  <item name="android:colorAccent">#00A86B</item>
+                  <item name="android:navigationBarColor">#FFFFFF</item>
+                  <item name="android:statusBarColor">#FFFFFF</item>
+                  <item name="android:windowLightStatusBar">true</item>
               </style>
-
           </resources>
           EOF
 
@@ -173,51 +148,56 @@ jobs:
           import android.app.Activity;
           import android.os.Bundle;
           import android.graphics.Color;
-          import android.graphics.Typeface;
           import android.view.Gravity;
-          import android.view.View;
-          import android.widget.Button;
-          import android.widget.EditText;
           import android.widget.LinearLayout;
-          import android.widget.ScrollView;
           import android.widget.TextView;
-          import android.widget.Toast;
 
           public class MainActivity extends Activity {
-
-              LinearLayout layout;
 
               @Override
               protected void onCreate(Bundle savedInstanceState) {
                   super.onCreate(savedInstanceState);
 
-                  ScrollView scroll = new ScrollView(this);
-                  scroll.setBackgroundColor(Color.rgb(16,16,16));
-
-                  layout = new LinearLayout(this);
+                  LinearLayout layout = new LinearLayout(this);
                   layout.setOrientation(LinearLayout.VERTICAL);
-                  layout.setPadding(35,35,35,35);
+                  layout.setGravity(Gravity.CENTER);
+                  layout.setPadding(30, 30, 30, 30);
+                  layout.setBackgroundColor(Color.WHITE);
 
-                  scroll.addView(layout);
+                  TextView title = new TextView(this);
+                  title.setText("MISHRA GYM PLANNER");
+                  title.setTextSize(26);
+                  title.setTextColor(Color.BLACK);
+                  title.setGravity(Gravity.CENTER);
 
-                  createApp();
+                  TextView subtitle = new TextView(this);
+                  subtitle.setText(
+                      "\nYour personalized Diet & Workout Planner\n\n" +
+                      "APK Build Successful ✅"
+                  );
+                  subtitle.setTextSize(18);
+                  subtitle.setGravity(Gravity.CENTER);
 
-                  setContentView(scroll);
+                  layout.addView(title);
+                  layout.addView(subtitle);
+
+                  setContentView(layout);
               }
+          }
+          EOF
 
-              TextView title(String text, int size) {
-                  TextView t = new TextView(this);
-                  t.setText(text);
-                  t.setTextColor(Color.WHITE);
-                  t.setTextSize(size);
-                  t.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-                  t.setPadding(10,20,10,20);
-                  return t;
-              }
+      - name: Download Gradle
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.9-bin.zip
+          unzip -q gradle-8.9-bin.zip
+          echo "$PWD/gradle-8.9/bin" >> $GITHUB_PATH
 
-              EditText input(String hint) {
-                  EditText e = new EditText(this);
-                  e.setHint(hint);
-                  e.setHintTextColor(Color.GRAY);
-                  e.setTextColor(Color.WHITE);
-                  e
+      - name: Build APK
+        run: gradle assembleDebug --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mishra-Gym-Planner-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
