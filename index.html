@@ -2,333 +2,684 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mishra Gym Planner</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#0b0d10;
-  color:#fff;
-  min-height:100vh;
+    background:#0b0d10;
+    color:#fff;
+    min-height:100vh;
 }
+
 .header{
-  background:linear-gradient(135deg,#11151a,#252b32);
-  padding:28px 18px;
-  text-align:center;
-  border-bottom:1px solid #333;
+    background:linear-gradient(135deg,#111318,#25282d);
+    text-align:center;
+    padding:35px 18px;
+    border-bottom:1px solid #333;
 }
+
 .logo{
-  width:82px;height:82px;
-  margin:auto;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ffb300,#ff6f00);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:45px;
-  box-shadow:0 8px 25px #000;
+    font-size:45px;
 }
+
 .header h1{
-  margin-top:15px;
-  font-size:28px;
-  letter-spacing:1px;
+    font-size:32px;
+    margin-top:8px;
+    font-weight:800;
 }
+
 .header p{
-  color:#aeb6bf;
-  margin-top:8px;
+    color:#c5c5c5;
+    margin-top:12px;
+    font-size:17px;
 }
+
 .container{
-  max-width:650px;
-  margin:auto;
-  padding:18px;
+    width:94%;
+    max-width:720px;
+    margin:25px auto;
 }
+
 .card{
-  background:#15191e;
-  border:1px solid #292f36;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
+    background:#15181d;
+    border:1px solid #292d34;
+    border-radius:24px;
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.35);
 }
+
 .card h2{
-  font-size:21px;
-  margin-bottom:18px;
+    font-size:25px;
+    margin-bottom:22px;
 }
+
 label{
-  display:block;
-  margin:14px 0 7px;
-  color:#cbd2d9;
-  font-weight:bold;
+    display:block;
+    font-weight:bold;
+    font-size:17px;
+    margin:18px 0 8px;
 }
+
 input,select{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #3a4149;
-  background:#0f1216;
-  color:white;
-  font-size:16px;
-  outline:none;
+    width:100%;
+    height:58px;
+    background:#101216;
+    color:#fff;
+    border:2px solid #343941;
+    border-radius:15px;
+    padding:0 16px;
+    font-size:17px;
+    outline:none;
 }
+
 input:focus,select:focus{
-  border-color:#ff9800;
+    border-color:#ff9d00;
 }
-button{
-  width:100%;
-  border:0;
-  border-radius:13px;
-  padding:15px;
-  margin-top:16px;
-  font-size:17px;
-  font-weight:bold;
-  background:linear-gradient(135deg,#ffb300,#ff6f00);
-  color:#111;
+
+.generate{
+    width:100%;
+    height:62px;
+    border:0;
+    border-radius:18px;
+    margin-top:25px;
+    background:linear-gradient(90deg,#ffb000,#ff6a00);
+    color:#111;
+    font-size:19px;
+    font-weight:900;
+    cursor:pointer;
 }
-button:active{transform:scale(.98)}
+
+.generate:active{
+    transform:scale(.98);
+}
+
+.hidden{
+    display:none;
+}
+
 .stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
+
 .stat{
-  background:#0f1216;
-  border:1px solid #292f36;
-  border-radius:14px;
-  padding:16px;
-  text-align:center;
+    background:#0e1014;
+    border:1px solid #30343b;
+    border-radius:16px;
+    padding:18px 10px;
+    text-align:center;
 }
-.stat strong{
-  display:block;
-  font-size:23px;
-  color:#ffb300;
-  margin-top:5px;
+
+.stat .number{
+    color:#ffad00;
+    font-size:25px;
+    font-weight:900;
 }
-.section-title{
-  display:flex;
-  align-items:center;
-  gap:10px;
+
+.stat small{
+    display:block;
+    color:#aaa;
+    margin-top:6px;
 }
+
 .meal{
-  background:#101419;
-  border:1px solid #2c333b;
-  border-radius:15px;
-  padding:16px;
-  margin-top:12px;
+    background:#101216;
+    border:1px solid #2d3239;
+    border-radius:17px;
+    padding:18px;
+    margin-bottom:14px;
 }
+
 .meal h3{
-  color:#ffb300;
-  margin-bottom:10px;
+    color:#ffb000;
+    margin-bottom:10px;
 }
-.row{
-  display:flex;
-  justify-content:space-between;
-  padding:7px 0;
-  border-bottom:1px solid #242a30;
+
+.meal p{
+    color:#ddd;
+    line-height:1.6;
+    margin:5px 0;
 }
-.row:last-child{border-bottom:0}
-.total{
-  margin-top:15px;
-  padding:15px;
-  border-radius:14px;
-  background:#20262d;
-}
+
 .exercise{
-  background:#101419;
-  border:1px solid #2c333b;
-  border-radius:15px;
-  padding:16px;
-  margin-top:12px;
+    background:#101216;
+    border:1px solid #2d3239;
+    border-radius:17px;
+    padding:18px;
+    margin-bottom:14px;
 }
+
 .exercise h3{
-  color:#ffb300;
-  margin-bottom:10px;
+    color:#ffb000;
+    margin-bottom:12px;
 }
-.badge{
-  display:inline-block;
-  padding:6px 9px;
-  border-radius:8px;
-  background:#292f36;
-  color:#ddd;
-  margin:3px;
-  font-size:13px;
+
+.exercise p{
+    line-height:1.7;
+    color:#ddd;
 }
-.note{
-  color:#9da6af;
-  font-size:13px;
-  line-height:1.5;
-  margin-top:12px;
+
+.section-title{
+    margin:8px 0 18px;
+    color:#fff;
 }
-.hidden{display:none}
+
+.tip{
+    background:#1d211f;
+    border-left:4px solid #ff9d00;
+    padding:15px;
+    border-radius:10px;
+    color:#ddd;
+    line-height:1.6;
+}
+
 .footer{
-  text-align:center;
-  padding:25px;
-  color:#727b84;
-  font-size:13px;
+    text-align:center;
+    color:#777;
+    padding:25px 10px 40px;
+    font-size:13px;
+}
+
+@media(max-width:450px){
+    .header h1{
+        font-size:27px;
+    }
+
+    .header p{
+        font-size:15px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <div class="logo">💪</div>
-  <h1>MISHRA GYM PLANNER</h1>
-  <p>Your Personalized Diet & Workout Planner</p>
-</div>
+<header class="header">
+    <div class="logo">💪</div>
+    <h1>MISHRA GYM PLANNER</h1>
+    <p>Your Personalized Diet & Workout Planner</p>
+</header>
 
-<div class="container">
+<main class="container">
 
-<div class="card">
-  <div class="section-title">
-    <h2>👤 Your Information</h2>
-  </div>
+<!-- USER INFORMATION -->
+<section class="card">
 
-  <label>Name</label>
-  <input id="name" type="text" placeholder="Enter your name">
+<h2>👤 Your Information</h2>
 
-  <label>Age</label>
-  <input id="age" type="number" placeholder="Age">
+<label for="name">Name</label>
+<input id="name" type="text" placeholder="Enter your name">
 
-  <label>Gender</label>
-  <select id="gender">
+<label for="age">Age</label>
+<input id="age" type="text" inputmode="numeric" placeholder="Enter age">
+
+<label for="gender">Gender</label>
+<select id="gender">
     <option value="male">Male</option>
     <option value="female">Female</option>
-  </select>
+</select>
 
-  <label>Height (cm)</label>
-  <input id="height" type="number" placeholder="Height">
+<label for="height">Height (cm)</label>
+<input id="height" type="text" inputmode="decimal" placeholder="Enter height">
 
-  <label>Weight (kg)</label>
-  <input id="weight" type="number" placeholder="Weight">
+<label for="weight">Weight (kg)</label>
+<input id="weight" type="text" inputmode="decimal" placeholder="Enter weight">
 
-  <label>Goal</label>
-  <select id="goal">
+<label for="goal">Goal</label>
+<select id="goal">
     <option value="gain">💪 Muscle Gain</option>
     <option value="loss">🔥 Fat Loss</option>
     <option value="maintain">⚖️ Maintenance</option>
-  </select>
+</select>
 
-  <label>Diet Preference</label>
-  <select id="diet">
+<label for="diet">Diet Preference</label>
+<select id="diet">
     <option value="veg">🥗 Vegetarian</option>
-    <option value="egg">🥚 Vegetarian + Eggs</option>
     <option value="nonveg">🍗 Non-Vegetarian</option>
-  </select>
+</select>
 
-  <label>Activity Level</label>
-  <select id="activity">
+<label for="activity">Activity Level</label>
+<select id="activity">
     <option value="1.2">Low Activity</option>
     <option value="1.375">Light Activity</option>
     <option value="1.55" selected>Moderate Activity</option>
     <option value="1.725">High Activity</option>
-  </select>
+    <option value="1.9">Very High Activity</option>
+</select>
 
-  <button onclick="generatePlan()">GENERATE MY PLAN 🚀</button>
+<button type="button" class="generate" onclick="generatePlan()">
+    GENERATE MY PLAN 🚀
+</button>
+
+</section>
+
+
+<!-- RESULT -->
+<section id="result" class="hidden">
+
+<div class="card">
+    <h2>🔥 Your Daily Targets</h2>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="number" id="calories">0</div>
+            <small>Calories / Day</small>
+        </div>
+
+        <div class="stat">
+            <div class="number" id="protein">0g</div>
+            <small>Protein</small>
+        </div>
+
+        <div class="stat">
+            <div class="number" id="carbs">0g</div>
+            <small>Carbohydrates</small>
+        </div>
+
+        <div class="stat">
+            <div class="number" id="fat">0g</div>
+            <small>Healthy Fat</small>
+        </div>
+
+    </div>
 </div>
 
 
-<div id="result" class="hidden">
-
+<!-- DIET -->
 <div class="card">
-  <h2>📊 Your Daily Targets</h2>
 
-  <div class="stats">
-    <div class="stat">
-      Calories
-      <strong id="calories">0</strong>
-      kcal
-    </div>
+<h2>🥗 Personalized Diet Plan</h2>
 
-    <div class="stat">
-      Protein
-      <strong id="protein">0</strong>
-      g
-    </div>
+<div id="dietPlan"></div>
 
-    <div class="stat">
-      Water
-      <strong id="water">0</strong>
-      L
-    </div>
+</div>
 
-    <div class="stat">
-      BMI
-      <strong id="bmi">0</strong>
-    </div>
-  </div>
 
-  <div class="total">
-    <div class="row">
-      <span>Goal</span>
-      <b id="goalText">-</b>
-    </div>
-    <div class="row">
-      <span>Daily Carbohydrates</span>
-      <b id="carbs">0 g</b>
-    </div>
-    <div class="row">
-      <span>Daily Fat</span>
-      <b id="fat">0 g</b>
-    </div>
-  </div>
+<!-- WORKOUT -->
+<div class="card">
+
+<h2>🏋️ Workout Plan</h2>
+
+<div id="workoutPlan"></div>
+
 </div>
 
 
 <div class="card">
-  <h2>🍽️ Personalized Diet Plan</h2>
 
-  <div class="meal">
-    <h3>🌅 Breakfast</h3>
-    <div class="row"><span>Oats</span><b>80 g</b></div>
-    <div class="row"><span>Milk</span><b>250 ml</b></div>
-    <div class="row"><span>Banana</span><b>1 medium</b></div>
-    <div class="row"><span>Almonds</span><b>15 g</b></div>
-    <div class="row"><span>Approx Calories</span><b>550 kcal</b></div>
-    <div class="row"><span>Approx Protein</span><b>20 g</b></div>
-  </div>
+<h2>💡 Daily Tips</h2>
 
-  <div class="meal">
-    <h3>🏋️ Pre-Workout</h3>
-    <div class="row"><span>Banana</span><b>1 medium</b></div>
-    <div class="row"><span>Black Coffee</span><b>1 cup</b></div>
-    <div class="row"><span>Water</span><b>300–500 ml</b></div>
-    <div class="row"><span>Approx Calories</span><b>110 kcal</b></div>
-  </div>
+<div class="tip">
+    💧 Drink around 2.5–3+ litres of water daily according to your needs.<br><br>
+    😴 Aim for 7–9 hours of quality sleep.<br><br>
+    🚶 Stay active throughout the day.<br><br>
+    📈 Increase workout weight/reps gradually with proper form.<br><br>
+    🍽️ Adjust portions based on progress, hunger and training performance.
+</div>
 
-  <div class="meal">
-    <h3>🥤 Post-Workout</h3>
-    <div class="row"><span>Curd</span><b>200 g</b></div>
-    <div class="row"><span>Fruit</span><b>150 g</b></div>
-    <div class="row"><span>Roasted Chana</span><b>30 g</b></div>
-    <div class="row"><span>Approx Protein</span><b>15 g</b></div>
-  </div>
+</div>
 
-  <div class="meal">
-    <h3>🍛 Lunch</h3>
-    <div class="row"><span>Rice / Chapati</span><b>200 g cooked / 3 roti</b></div>
-    <div class="row"><span>Paneer / Soya</span><b>100 g / 50 g dry</b></div>
-    <div class="row"><span>Dal</span><b>1 bowl</b></div>
-    <div class="row"><span>Vegetables</span><b>150–200 g</b></div>
-    <div class="row"><span>Curd</span><b>100 g</b></div>
-  </div>
+</section>
 
-  <div class="meal">
-    <h3>🥗 Evening Snack</h3>
-    <div class="row"><span>Moong</span><b>50 g</b></div>
-    <div class="row"><span>Black Chana</span><b>50 g</b></div>
-    <div class="row"><span>Salad</span><b>150 g</b></div>
-    <div class="row"><span>Lemon</span><b>1/2</b></div>
-  </div>
+</main>
 
-  <div class="meal">
-    <h3>🌙 Dinner</h3>
-    <div class="row"><span>Chapati</span><b>2–3</b></div>
-    <div class="row"><span>Paneer / Soya</span><b>100 g / 50 g dry</b></div>
-    <div class="row"><span>Vegetables</span><b>150–200 g</b></div>
-    <div class="row"><span>Salad</span><b>1 bowl</b></div>
-  </div>
+<footer class="footer">
+    MISHRA GYM PLANNER © 2026
+</footer>
 
-  <div class="total">
-    <
+
+<script>
+
+function generatePlan(){
+
+    const name =
+        document.getElementById("name").value.trim() || "Athlete";
+
+    const age =
+        parseFloat(document.getElementById("age").value);
+
+    const height =
+        parseFloat(document.getElementById("height").value);
+
+    const weight =
+        parseFloat(document.getElementById("weight").value);
+
+    const gender =
+        document.getElementById("gender").value;
+
+    const goal =
+        document.getElementById("goal").value;
+
+    const diet =
+        document.getElementById("diet").value;
+
+    const activity =
+        parseFloat(document.getElementById("activity").value);
+
+
+    /* VALIDATION */
+
+    if(
+        !Number.isFinite(age) ||
+        !Number.isFinite(height) ||
+        !Number.isFinite(weight) ||
+        age <= 0 ||
+        height <= 0 ||
+        weight <= 0
+    ){
+        alert("Please enter valid Age, Height and Weight.");
+        return;
+    }
+
+
+    /* BMR */
+
+    let bmr;
+
+    if(gender === "male"){
+        bmr =
+            (10 * weight) +
+            (6.25 * height) -
+            (5 * age) +
+            5;
+    }else{
+        bmr =
+            (10 * weight) +
+            (6.25 * height) -
+            (5 * age) -
+            161;
+    }
+
+
+    /* TDEE */
+
+    let calories = bmr * activity;
+
+
+    /* GOAL CALORIES */
+
+    if(goal === "gain"){
+        calories += 250;
+    }
+
+    if(goal === "loss"){
+        calories -= 400;
+    }
+
+    calories = Math.round(calories);
+
+
+    /* PROTEIN */
+
+    let protein;
+
+    if(goal === "gain"){
+        protein = Math.round(weight * 1.8);
+    }
+    else if(goal === "loss"){
+        protein = Math.round(weight * 2.0);
+    }
+    else{
+        protein = Math.round(weight * 1.6);
+    }
+
+
+    /* FAT */
+
+    const fat =
+        Math.round((calories * 0.25) / 9);
+
+
+    /* CARBS */
+
+    const carbs =
+        Math.max(
+            0,
+            Math.round(
+                (calories - (protein * 4) - (fat * 9)) / 4
+            )
+        );
+
+
+    /* DISPLAY */
+
+    document.getElementById("calories").innerText =
+        calories;
+
+    document.getElementById("protein").innerText =
+        protein + "g";
+
+    document.getElementById("carbs").innerText =
+        carbs + "g";
+
+    document.getElementById("fat").innerText =
+        fat + "g";
+
+
+    /* DIET PLAN */
+
+    let meals = "";
+
+
+    if(diet === "veg"){
+
+        meals = `
+
+        <div class="meal">
+            <h3>🌅 Breakfast</h3>
+            <p><b>Oats:</b> 60–80g</p>
+            <p><b>Milk:</b> 250ml</p>
+            <p><b>Banana:</b> 1 medium</p>
+            <p><b>Almonds:</b> 10–15g</p>
+            <p>Approx: protein-rich balanced breakfast.</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🍛 Lunch</h3>
+            <p><b>Rice:</b> 150–200g cooked</p>
+            <p><b>Soya chunks:</b> 40–50g dry weight</p>
+            <p><b>Curd:</b> 150g</p>
+            <p><b>Vegetables:</b> 150–200g</p>
+            <p>Use moderate oil and plenty of vegetables.</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🥜 Evening Snack</h3>
+            <p><b>Roasted chana:</b> 40–50g</p>
+            <p><b>Fruit:</b> 1 serving</p>
+            <p><b>Curd:</b> 100–150g if required</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🥗 Salad</h3>
+            <p><b>Moong:</b> 40–50g</p>
+            <p><b>Black chana:</b> 40–50g</p>
+            <p><b>Cucumber + Tomato + Onion:</b> 150g</p>
+            <p>Lemon and herbs for flavour.</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🌙 Dinner</h3>
+            <p><b>Paneer:</b> 100–150g</p>
+            <p><b>Roti:</b> 2–3</p>
+            <p><b>Mixed vegetables:</b> 150–200g</p>
+            <p>Adjust portions according to your calorie target.</p>
+        </div>
+
+        `;
+
+    }else{
+
+        meals = `
+
+        <div class="meal">
+            <h3>🌅 Breakfast</h3>
+            <p><b>Oats:</b> 60–80g</p>
+            <p><b>Milk:</b> 250ml</p>
+            <p><b>Eggs:</b> 2 whole eggs</p>
+            <p><b>Banana:</b> 1 medium</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🍛 Lunch</h3>
+            <p><b>Chicken:</b> 120–150g cooked</p>
+            <p><b>Rice:</b> 150–200g cooked</p>
+            <p><b>Curd:</b> 100–150g</p>
+            <p><b>Vegetables:</b> 150–200g</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🥜 Evening Snack</h3>
+            <p><b>Eggs:</b> 2 boiled eggs</p>
+            <p><b>Fruit:</b> 1 serving</p>
+            <p><b>Roasted chana:</b> 30–40g</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🥗 Salad</h3>
+            <p>Cucumber + Tomato + Onion + Lemon</p>
+            <p>Approx. 150–200g vegetables.</p>
+        </div>
+
+
+        <div class="meal">
+            <h3>🌙 Dinner</h3>
+            <p><b>Chicken/Fish:</b> 120–150g cooked</p>
+            <p><b>Roti:</b> 2–3</p>
+            <p><b>Vegetables:</b> 150–200g</p>
+        </div>
+
+        `;
+    }
+
+
+    document.getElementById("dietPlan").innerHTML =
+        meals;
+
+
+    /* WORKOUT */
+
+    let workout = `
+
+    <div class="exercise">
+        <h3>🔥 Day 1 — Chest + Triceps</h3>
+        <p>Bench Press — 4 sets × 8–12 reps</p>
+        <p>Incline Dumbbell Press — 3 × 8–12</p>
+        <p>Cable Fly — 3 × 12–15</p>
+        <p>Triceps Pushdown — 3 × 10–15</p>
+        <p>Overhead Triceps Extension — 3 × 10–12</p>
+        <p><b>Rest:</b> 60–120 sec between sets</p>
+    </div>
+
+
+    <div class="exercise">
+        <h3>💪 Day 2 — Back + Biceps</h3>
+        <p>Lat Pulldown — 4 × 8–12</p>
+        <p>Seated Cable Row — 3 × 8–12</p>
+        <p>One Arm Dumbbell Row — 3 × 10–12</p>
+        <p>Dumbbell Curl — 3 × 10–12</p>
+        <p>Hammer Curl — 3 × 10–12</p>
+        <p><b>Rest:</b> 60–120 sec</p>
+    </div>
+
+
+    <div class="exercise">
+        <h3>🦵 Day 3 — Legs</h3>
+        <p>Squat — 4 × 6–10</p>
+        <p>Leg Press — 3 × 10–12</p>
+        <p>Leg Curl — 3 × 10–15</p>
+        <p>Leg Extension — 3 × 10–15</p>
+        <p>Calf Raise — 4 × 12–20</p>
+        <p><b>Rest:</b> 90–150 sec</p>
+    </div>
+
+
+    <div class="exercise">
+        <h3>🏋️ Day 4 — Shoulders</h3>
+        <p>Overhead Press — 4 × 8–12</p>
+        <p>Lateral Raise — 4 × 12–15</p>
+        <p>Rear Delt Fly — 3 × 12–15</p>
+        <p>Face Pull — 3 × 12–15</p>
+        <p><b>Rest:</b> 60–120 sec</p>
+    </div>
+
+
+    <div class="exercise">
+        <h3>🔥 Day 5 — Arms</h3>
+        <p>Barbell Curl — 3 × 8–12</p>
+        <p>Incline Dumbbell Curl — 3 × 10–12</p>
+        <p>Close Grip Press — 3 × 8–12</p>
+        <p>Triceps Pushdown — 3 × 10–15</p>
+        <p>Hammer Curl — 3 × 10–12</p>
+        <p><b>Rest:</b> 60–90 sec</p>
+    </div>
+
+
+    <div class="exercise">
+        <h3>⚡ Day 6 — Full Body / Conditioning</h3>
+        <p>Goblet Squat — 3 × 10–15</p>
+        <p>Push-ups — 3 × 10–15</p>
+        <p>Lat Pulldown — 3 × 10–12</p>
+        <p>Dumbbell Row — 3 × 10–12</p>
+        <p>Plank — 3 × 30–60 sec</p>
+        <p><b>Rest:</b> 60–120 sec</p>
+    </div>
+
+
+    <div class="exercise">
+        <h3>😴 Day 7 — Recovery</h3>
+        <p>Light walking, stretching and recovery.</p>
+        <p>Avoid hard training if you are very fatigued.</p>
+    </div>
+
+    `;
+
+
+    document.getElementById("workoutPlan").innerHTML =
+        workout;
+
+
+    /* SHOW RESULT */
+
+    const result =
+        document.getElementById("result");
+
+    result.classList.remove("hidden");
+
+    result.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
