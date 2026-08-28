@@ -7,205 +7,261 @@
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial, sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#0b0d10;
-    color:#fff;
-    min-height:100vh;
+  background:#080b0f;
+  color:#fff;
+  min-height:100vh;
 }
 
 .header{
-    background:linear-gradient(135deg,#111318,#25282d);
-    text-align:center;
-    padding:35px 18px;
-    border-bottom:1px solid #333;
+  background:
+    radial-gradient(circle at top,#252b31,#080b0f 70%);
+  padding:28px 18px;
+  text-align:center;
+  border-bottom:1px solid #30363d;
 }
 
 .logo{
-    font-size:45px;
+  width:100px;
+  height:100px;
+  margin:auto;
+  border-radius:25px;
+  background:linear-gradient(145deg,#171b20,#050607);
+  border:2px solid #f4c400;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:55px;
+  box-shadow:0 0 25px rgba(255,193,7,.25);
 }
 
 .header h1{
-    font-size:32px;
-    margin-top:8px;
-    font-weight:800;
+  margin-top:15px;
+  font-size:30px;
+  letter-spacing:1px;
+}
+
+.header h1 span{
+  color:#ffc400;
 }
 
 .header p{
-    color:#c5c5c5;
-    margin-top:12px;
-    font-size:17px;
+  color:#aeb4bb;
+  margin-top:8px;
 }
 
 .container{
-    width:94%;
-    max-width:720px;
-    margin:25px auto;
+  width:94%;
+  max-width:850px;
+  margin:20px auto 50px;
 }
 
 .card{
-    background:#15181d;
-    border:1px solid #292d34;
-    border-radius:24px;
-    padding:24px;
-    margin-bottom:20px;
-    box-shadow:0 12px 35px rgba(0,0,0,.35);
+  background:linear-gradient(145deg,#151a20,#0d1116);
+  border:1px solid #303740;
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
 }
 
 .card h2{
-    font-size:25px;
-    margin-bottom:22px;
+  font-size:22px;
+  margin-bottom:18px;
 }
 
 label{
-    display:block;
-    font-weight:bold;
-    font-size:17px;
-    margin:18px 0 8px;
+  display:block;
+  margin:15px 0 7px;
+  font-weight:bold;
+  color:#e7e9eb;
 }
 
 input,select{
-    width:100%;
-    height:58px;
-    background:#101216;
-    color:#fff;
-    border:2px solid #343941;
-    border-radius:15px;
-    padding:0 16px;
-    font-size:17px;
-    outline:none;
+  width:100%;
+  padding:15px;
+  background:#0b0f14;
+  color:#fff;
+  border:1px solid #3a414a;
+  border-radius:13px;
+  font-size:16px;
+  outline:none;
 }
 
 input:focus,select:focus{
-    border-color:#ff9d00;
+  border-color:#ffc400;
+  box-shadow:0 0 0 2px rgba(255,196,0,.1);
 }
 
-.generate{
-    width:100%;
-    height:62px;
-    border:0;
-    border-radius:18px;
-    margin-top:25px;
-    background:linear-gradient(90deg,#ffb000,#ff6a00);
-    color:#111;
-    font-size:19px;
-    font-weight:900;
-    cursor:pointer;
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.generate:active{
-    transform:scale(.98);
+.btn{
+  width:100%;
+  border:0;
+  padding:17px;
+  margin-top:22px;
+  border-radius:15px;
+  background:linear-gradient(90deg,#ffd000,#ff7a00);
+  color:#111;
+  font-size:17px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 7px 20px rgba(255,140,0,.25);
+}
+
+.btn:active{
+  transform:scale(.98);
 }
 
 .hidden{
-    display:none;
+  display:none;
 }
 
 .stats{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
 .stat{
-    background:#0e1014;
-    border:1px solid #30343b;
-    border-radius:16px;
-    padding:18px 10px;
-    text-align:center;
+  background:#10161c;
+  border:1px solid #303840;
+  padding:14px 8px;
+  border-radius:14px;
+  text-align:center;
 }
 
-.stat .number{
-    color:#ffad00;
-    font-size:25px;
-    font-weight:900;
+.stat strong{
+  display:block;
+  font-size:20px;
+  color:#ffc400;
 }
 
 .stat small{
-    display:block;
-    color:#aaa;
-    margin-top:6px;
+  color:#aeb4bb;
+}
+
+.goal-box{
+  margin-top:15px;
+  padding:16px;
+  border-radius:15px;
+  background:#111820;
+  border-left:4px solid #ffc400;
 }
 
 .meal{
-    background:#101216;
-    border:1px solid #2d3239;
-    border-radius:17px;
-    padding:18px;
-    margin-bottom:14px;
+  margin-top:15px;
+  background:#10161c;
+  border:1px solid #303840;
+  border-radius:16px;
+  padding:16px;
 }
 
 .meal h3{
-    color:#ffb000;
-    margin-bottom:10px;
+  color:#ffc400;
+  margin-bottom:10px;
 }
 
-.meal p{
-    color:#ddd;
-    line-height:1.6;
-    margin:5px 0;
+.meal ul{
+  padding-left:20px;
+  line-height:1.8;
+  color:#d9dde1;
+}
+
+.nutrition{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:12px;
+}
+
+.nut{
+  background:#080d12;
+  border-radius:10px;
+  padding:9px 4px;
+  text-align:center;
+  font-size:13px;
+}
+
+.nut b{
+  display:block;
+  color:#fff;
+  margin-bottom:3px;
 }
 
 .exercise{
-    background:#101216;
-    border:1px solid #2d3239;
-    border-radius:17px;
-    padding:18px;
-    margin-bottom:14px;
+  background:#10161c;
+  border:1px solid #303840;
+  border-radius:16px;
+  padding:16px;
+  margin-top:12px;
 }
 
 .exercise h3{
-    color:#ffb000;
-    margin-bottom:12px;
+  color:#fff;
+  margin-bottom:8px;
 }
 
-.exercise p{
-    line-height:1.7;
-    color:#ddd;
+.exercise-info{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
 }
 
-.section-title{
-    margin:8px 0 18px;
-    color:#fff;
+.tag{
+  background:#1b242c;
+  color:#ffc400;
+  padding:7px 10px;
+  border-radius:8px;
+  font-size:13px;
 }
 
 .tip{
-    background:#1d211f;
-    border-left:4px solid #ff9d00;
-    padding:15px;
-    border-radius:10px;
-    color:#ddd;
-    line-height:1.6;
+  margin-top:10px;
+  color:#aeb4bb;
+  font-size:14px;
+}
+
+.day-title{
+  color:#ffc400;
+  font-size:20px;
+  margin-top:22px;
+  margin-bottom:8px;
 }
 
 .footer{
-    text-align:center;
-    color:#777;
-    padding:25px 10px 40px;
-    font-size:13px;
+  text-align:center;
+  color:#69727c;
+  padding:25px;
+  font-size:13px;
 }
 
-@media(max-width:450px){
-    .header h1{
-        font-size:27px;
-    }
+@media(max-width:600px){
+  .row{
+    grid-template-columns:1fr;
+  }
 
-    .header p{
-        font-size:15px;
-    }
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-    .card{
-        padding:20px;
-    }
+  .nutrition{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .header h1{
+    font-size:27px;
+  }
 }
 </style>
 </head>
@@ -213,60 +269,88 @@ input:focus,select:focus{
 <body>
 
 <header class="header">
-    <div class="logo">💪</div>
-    <h1>MISHRA GYM PLANNER</h1>
-    <p>Your Personalized Diet & Workout Planner</p>
+
+  <div class="logo">💪</div>
+
+  <h1>MISHRA <span>GYM PLANNER</span></h1>
+
+  <p>Your Personalized Diet & Workout Planner</p>
+
 </header>
+
 
 <main class="container">
 
-<!-- USER INFORMATION -->
+<!-- PROFILE -->
 <section class="card">
 
 <h2>👤 Your Information</h2>
 
-<label for="name">Name</label>
+<label>Name</label>
 <input id="name" type="text" placeholder="Enter your name">
 
-<label for="age">Age</label>
-<input id="age" type="text" inputmode="numeric" placeholder="Enter age">
+<div class="row">
 
-<label for="gender">Gender</label>
+<div>
+<label>Age</label>
+<input id="age" type="number" min="13" max="100" placeholder="Age">
+</div>
+
+<div>
+<label>Gender</label>
 <select id="gender">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
+<option value="male">Male</option>
+<option value="female">Female</option>
 </select>
+</div>
 
-<label for="height">Height (cm)</label>
-<input id="height" type="text" inputmode="decimal" placeholder="Enter height">
+</div>
 
-<label for="weight">Weight (kg)</label>
-<input id="weight" type="text" inputmode="decimal" placeholder="Enter weight">
 
-<label for="goal">Goal</label>
+<div class="row">
+
+<div>
+<label>Height (cm)</label>
+<input id="height" type="number" placeholder="Height">
+</div>
+
+<div>
+<label>Weight (kg)</label>
+<input id="weight" type="number" placeholder="Weight">
+</div>
+
+</div>
+
+
+<label>Goal</label>
+
 <select id="goal">
-    <option value="gain">💪 Muscle Gain</option>
-    <option value="loss">🔥 Fat Loss</option>
-    <option value="maintain">⚖️ Maintenance</option>
+<option value="gain">💪 Muscle Gain</option>
+<option value="loss">🔥 Fat Loss</option>
+<option value="fitness">⚡ General Fitness</option>
 </select>
 
-<label for="diet">Diet Preference</label>
+
+<label>Diet Preference</label>
+
 <select id="diet">
-    <option value="veg">🥗 Vegetarian</option>
-    <option value="nonveg">🍗 Non-Vegetarian</option>
+<option value="veg">🥗 Vegetarian</option>
+<option value="nonveg">🍗 Non-Vegetarian</option>
 </select>
 
-<label for="activity">Activity Level</label>
+
+<label>Activity Level</label>
+
 <select id="activity">
-    <option value="1.2">Low Activity</option>
-    <option value="1.375">Light Activity</option>
-    <option value="1.55" selected>Moderate Activity</option>
-    <option value="1.725">High Activity</option>
-    <option value="1.9">Very High Activity</option>
+<option value="1.2">Low Activity</option>
+<option value="1.375">Light Activity</option>
+<option value="1.55" selected>Moderate Activity</option>
+<option value="1.725">High Activity</option>
 </select>
 
-<button type="button" class="generate" onclick="generatePlan()">
-    GENERATE MY PLAN 🚀
+
+<button class="btn" onclick="generatePlan()">
+🔥 GENERATE MY PLAN 🚀
 </button>
 
 </section>
@@ -276,40 +360,156 @@ input:focus,select:focus{
 <section id="result" class="hidden">
 
 <div class="card">
-    <h2>🔥 Your Daily Targets</h2>
 
-    <div class="stats">
+<h2>📊 Your Fitness Summary</h2>
 
-        <div class="stat">
-            <div class="number" id="calories">0</div>
-            <small>Calories / Day</small>
-        </div>
+<div class="stats">
 
-        <div class="stat">
-            <div class="number" id="protein">0g</div>
-            <small>Protein</small>
-        </div>
+<div class="stat">
+<strong id="rWeight">--</strong>
+<small>Weight</small>
+</div>
 
-        <div class="stat">
-            <div class="number" id="carbs">0g</div>
-            <small>Carbohydrates</small>
-        </div>
+<div class="stat">
+<strong id="rHeight">--</strong>
+<small>Height</small>
+</div>
 
-        <div class="stat">
-            <div class="number" id="fat">0g</div>
-            <small>Healthy Fat</small>
-        </div>
+<div class="stat">
+<strong id="rBMI">--</strong>
+<small>BMI</small>
+</div>
 
-    </div>
+<div class="stat">
+<strong id="rCalories">--</strong>
+<small>Calories</small>
+</div>
+
+</div>
+
+
+<div class="goal-box">
+
+<strong id="welcome"></strong>
+
+<p id="goalText" style="margin-top:8px;color:#bfc5ca"></p>
+
+</div>
+
 </div>
 
 
 <!-- DIET -->
 <div class="card">
 
-<h2>🥗 Personalized Diet Plan</h2>
+<h2>🥗 Daily Diet Plan</h2>
 
-<div id="dietPlan"></div>
+<div class="stats">
+
+<div class="stat">
+<strong id="calorieTarget">--</strong>
+<small>Calories/day</small>
+</div>
+
+<div class="stat">
+<strong id="proteinTarget">--</strong>
+<small>Protein/day</small>
+</div>
+
+<div class="stat">
+<strong>3L</strong>
+<small>Water</small>
+</div>
+
+<div class="stat">
+<strong>7-8h</strong>
+<small>Sleep</small>
+</div>
+
+</div>
+
+
+<div class="meal">
+
+<h3>🌅 Early Morning</h3>
+
+<ul>
+<li>Warm water — 300–500 ml</li>
+<li>Almonds — 5–6 pieces</li>
+</ul>
+
+<div class="nutrition">
+<div class="nut"><b>80</b>Calories</div>
+<div class="nut"><b>3g</b>Protein</div>
+<div class="nut"><b>4g</b>Carbs</div>
+<div class="nut"><b>6g</b>Fat</div>
+</div>
+
+</div>
+
+
+<div class="meal">
+
+<h3>🍳 Breakfast</h3>
+
+<ul id="breakfast"></ul>
+
+<div class="nutrition">
+<div class="nut"><b>520</b>Calories</div>
+<div class="nut"><b>25g</b>Protein</div>
+<div class="nut"><b>70g</b>Carbs</div>
+<div class="nut"><b>12g</b>Fat</div>
+</div>
+
+</div>
+
+
+<div class="meal">
+
+<h3>🍚 Lunch</h3>
+
+<ul id="lunch"></ul>
+
+<div class="nutrition">
+<div class="nut"><b>720</b>Calories</div>
+<div class="nut"><b>35g</b>Protein</div>
+<div class="nut"><b>85g</b>Carbs</div>
+<div class="nut"><b>18g</b>Fat</div>
+</div>
+
+</div>
+
+
+<div class="meal">
+
+<h3>🥜 Evening Snack</h3>
+
+<ul id="snack"></ul>
+
+<div class="nutrition">
+<div class="nut"><b>300</b>Calories</div>
+<div class="nut"><b>22g</b>Protein</div>
+<div class="nut"><b>30g</b>Carbs</div>
+<div class="nut"><b>8g</b>Fat</div>
+</div>
+
+</div>
+
+
+<div class="meal">
+
+<h3>🌙 Dinner</h3>
+
+<ul id="dinner"></ul>
+
+<div class="nutrition">
+<div class="nut"><b>650</b>Calories</div>
+<div class="nut"><b>35g</b>Protein</div>
+<div class="nut"><b>55g</b>Carbs</div>
+<div class="nut"><b>18g</b>Fat</div>
+</div>
+
+</div>
 
 </div>
 
@@ -317,23 +517,238 @@ input:focus,select:focus{
 <!-- WORKOUT -->
 <div class="card">
 
-<h2>🏋️ Workout Plan</h2>
+<h2>🏋️ Weekly Workout Plan</h2>
 
-<div id="workoutPlan"></div>
+<div class="day-title">MONDAY — Chest + Triceps</div>
+
+<div class="exercise">
+<h3>Barbell Bench Press</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">8–12 Reps</span>
+<span class="tag">Rest 90 sec</span>
+</div>
+<p class="tip">Keep your back stable and control the weight.</p>
+</div>
+
+<div class="exercise">
+<h3>Incline Dumbbell Press</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">10–12 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Cable Fly</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">12–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Triceps Pushdown</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">12–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+
+<div class="day-title">TUESDAY — Back + Biceps</div>
+
+<div class="exercise">
+<h3>Lat Pulldown</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">8–12 Reps</span>
+<span class="tag">Rest 75 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Barbell Row</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">8–12 Reps</span>
+<span class="tag">Rest 90 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Seated Cable Row</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–12 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Dumbbell Curl</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+
+<div class="day-title">WEDNESDAY — Legs</div>
+
+<div class="exercise">
+<h3>Squat</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">8–12 Reps</span>
+<span class="tag">Rest 90 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Leg Press</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–15 Reps</span>
+<span class="tag">Rest 75 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Leg Curl</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">12–15 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Calf Raises</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">12–20 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+
+<div class="day-title">THURSDAY — Shoulders</div>
+
+<div class="exercise">
+<h3>Overhead Press</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">8–12 Reps</span>
+<span class="tag">Rest 90 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Lateral Raise</h3>
+<div class="exercise-info">
+<span class="tag">4 Sets</span>
+<span class="tag">12–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Rear Delt Fly</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">12–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+
+<div class="day-title">FRIDAY — Arms</div>
+
+<div class="exercise">
+<h3>EZ Bar Curl</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–12 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Hammer Curl</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Triceps Extension</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–15 Reps</span>
+<span class="tag">Rest 45 sec</span>
+</div>
+</div>
+
+
+<div class="day-title">SATURDAY — Full Body</div>
+
+<div class="exercise">
+<h3>Goblet Squat</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">12 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Push Ups</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–20 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+<div class="exercise">
+<h3>Lat Pulldown</h3>
+<div class="exercise-info">
+<span class="tag">3 Sets</span>
+<span class="tag">10–12 Reps</span>
+<span class="tag">Rest 60 sec</span>
+</div>
+</div>
+
+
+<div class="day-title">SUNDAY — Rest & Recovery</div>
+
+<div class="goal-box">
+😴 Light walking + stretching + proper sleep.
+</div>
 
 </div>
 
 
+<!-- HABITS -->
 <div class="card">
 
-<h2>💡 Daily Tips</h2>
+<h2>🔥 Daily Targets</h2>
 
-<div class="tip">
-    💧 Drink around 2.5–3+ litres of water daily according to your needs.<br><br>
-    😴 Aim for 7–9 hours of quality sleep.<br><br>
-    🚶 Stay active throughout the day.<br><br>
-    📈 Increase workout weight/reps gradually with proper form.<br><br>
-    🍽️ Adjust portions based on progress, hunger and training performance.
+<div class="meal">
+<ul>
+<li>💧 Water — around 3 liters/day</li>
+<li>🚶 Steps — 8,000–10,000/day</li>
+<li>😴 Sleep — 7–9 hours</li>
+<li>🥗 Protein — hit your daily target</li>
+<li>🏋️ Workout — follow your scheduled session</li>
+</ul>
 </div>
 
 </div>
@@ -342,8 +757,9 @@ input:focus,select:focus{
 
 </main>
 
+
 <footer class="footer">
-    MISHRA GYM PLANNER © 2026
+MISHRA GYM PLANNER • Train Smart • Eat Smart • Stay Consistent 💪
 </footer>
 
 
@@ -351,333 +767,321 @@ input:focus,select:focus{
 
 function generatePlan(){
 
-    const name =
-        document.getElementById("name").value.trim() || "Athlete";
+  const name =
+    document.getElementById("name").value.trim() || "Champion";
 
-    const age =
-        parseFloat(document.getElementById("age").value);
+  const age =
+    Number(document.getElementById("age").value);
 
-    const height =
-        parseFloat(document.getElementById("height").value);
+  const gender =
+    document.getElementById("gender").value;
 
-    const weight =
-        parseFloat(document.getElementById("weight").value);
+  const height =
+    Number(document.getElementById("height").value);
 
-    const gender =
-        document.getElementById("gender").value;
+  const weight =
+    Number(document.getElementById("weight").value);
 
-    const goal =
-        document.getElementById("goal").value;
+  const goal =
+    document.getElementById("goal").value;
 
-    const diet =
-        document.getElementById("diet").value;
+  const diet =
+    document.getElementById("diet").value;
 
-    const activity =
-        parseFloat(document.getElementById("activity").value);
+  const activity =
+    Number(document.getElementById("activity").value);
 
 
-    /* VALIDATION */
+  if(!age || !height || !weight){
 
-    if(
-        !Number.isFinite(age) ||
-        !Number.isFinite(height) ||
-        !Number.isFinite(weight) ||
-        age <= 0 ||
-        height <= 0 ||
-        weight <= 0
-    ){
-        alert("Please enter valid Age, Height and Weight.");
-        return;
-    }
+    alert("Please enter Age, Height and Weight.");
 
+    return;
+  }
 
-    /* BMR */
 
-    let bmr;
+  if(age < 13 || height < 100 || weight < 25){
 
-    if(gender === "male"){
-        bmr =
-            (10 * weight) +
-            (6.25 * height) -
-            (5 * age) +
-            5;
-    }else{
-        bmr =
-            (10 * weight) +
-            (6.25 * height) -
-            (5 * age) -
-            161;
-    }
+    alert("Please enter valid body information.");
 
+    return;
+  }
 
-    /* TDEE */
 
-    let calories = bmr * activity;
+  // BMI
+  const bmi =
+    weight / ((height/100) * (height/100));
 
 
-    /* GOAL CALORIES */
+  // BMR
+  let bmr;
 
-    if(goal === "gain"){
-        calories += 250;
-    }
+  if(gender === "male"){
 
-    if(goal === "loss"){
-        calories -= 400;
-    }
+    bmr =
+      (10 * weight) +
+      (6.25 * height) -
+      (5 * age) +
+      5;
 
-    calories = Math.round(calories);
+  }else{
 
+    bmr =
+      (10 * weight) +
+      (6.25 * height) -
+      (5 * age) -
+      161;
+  }
 
-    /* PROTEIN */
 
-    let protein;
+  // TDEE
+  let calories =
+    bmr * activity;
 
-    if(goal === "gain"){
-        protein = Math.round(weight * 1.8);
-    }
-    else if(goal === "loss"){
-        protein = Math.round(weight * 2.0);
-    }
-    else{
-        protein = Math.round(weight * 1.6);
-    }
 
+  if(goal === "gain"){
 
-    /* FAT */
+    calories += 250;
 
-    const fat =
-        Math.round((calories * 0.25) / 9);
+  }else if(goal === "loss"){
 
+    calories -= 400;
+  }
 
-    /* CARBS */
 
-    const carbs =
-        Math.max(
-            0,
-            Math.round(
-                (calories - (protein * 4) - (fat * 9)) / 4
-            )
-        );
+  calories =
+    Math.round(calories);
 
 
-    /* DISPLAY */
+  // Protein target
+  let protein;
 
-    document.getElementById("calories").innerText =
-        calories;
+  if(goal === "gain"){
 
-    document.getElementById("protein").innerText =
-        protein + "g";
+    protein =
+      Math.round(weight * 1.8);
 
-    document.getElementById("carbs").innerText =
-        carbs + "g";
+  }else if(goal === "loss"){
 
-    document.getElementById("fat").innerText =
-        fat + "g";
+    protein =
+      Math.round(weight * 1.8);
 
+  }else{
 
-    /* DIET PLAN */
+    protein =
+      Math.round(weight * 1.5);
+  }
 
-    let meals = "";
 
+  // Display
+  document.getElementById("result")
+    .classList.remove("hidden");
 
-    if(diet === "veg"){
 
-        meals = `
+  document.getElementById("welcome")
+    .innerText =
+    "Welcome, " + name + " 💪";
 
-        <div class="meal">
-            <h3>🌅 Breakfast</h3>
-            <p><b>Oats:</b> 60–80g</p>
-            <p><b>Milk:</b> 250ml</p>
-            <p><b>Banana:</b> 1 medium</p>
-            <p><b>Almonds:</b> 10–15g</p>
-            <p>Approx: protein-rich balanced breakfast.</p>
-        </div>
 
+  document.getElementById("rWeight")
+    .innerText =
+    weight + " kg";
 
-        <div class="meal">
-            <h3>🍛 Lunch</h3>
-            <p><b>Rice:</b> 150–200g cooked</p>
-            <p><b>Soya chunks:</b> 40–50g dry weight</p>
-            <p><b>Curd:</b> 150g</p>
-            <p><b>Vegetables:</b> 150–200g</p>
-            <p>Use moderate oil and plenty of vegetables.</p>
-        </div>
 
+  document.getElementById("rHeight")
+    .innerText =
+    height + " cm";
 
-        <div class="meal">
-            <h3>🥜 Evening Snack</h3>
-            <p><b>Roasted chana:</b> 40–50g</p>
-            <p><b>Fruit:</b> 1 serving</p>
-            <p><b>Curd:</b> 100–150g if required</p>
-        </div>
 
+  document.getElementById("rBMI")
+    .innerText =
+    bmi.toFixed(1);
 
-        <div class="meal">
-            <h3>🥗 Salad</h3>
-            <p><b>Moong:</b> 40–50g</p>
-            <p><b>Black chana:</b> 40–50g</p>
-            <p><b>Cucumber + Tomato + Onion:</b> 150g</p>
-            <p>Lemon and herbs for flavour.</p>
-        </div>
 
+  document.getElementById("rCalories")
+    .innerText =
+    calories;
 
-        <div class="meal">
-            <h3>🌙 Dinner</h3>
-            <p><b>Paneer:</b> 100–150g</p>
-            <p><b>Roti:</b> 2–3</p>
-            <p><b>Mixed vegetables:</b> 150–200g</p>
-            <p>Adjust portions according to your calorie target.</p>
-        </div>
 
-        `;
+  document.getElementById("calorieTarget")
+    .innerText =
+    calories;
 
-    }else{
 
-        meals = `
+  document.getElementById("proteinTarget")
+    .innerText =
+    protein + "g";
 
-        <div class="meal">
-            <h3>🌅 Breakfast</h3>
-            <p><b>Oats:</b> 60–80g</p>
-            <p><b>Milk:</b> 250ml</p>
-            <p><b>Eggs:</b> 2 whole eggs</p>
-            <p><b>Banana:</b> 1 medium</p>
-        </div>
 
+  let goalText = "";
 
-        <div class="meal">
-            <h3>🍛 Lunch</h3>
-            <p><b>Chicken:</b> 120–150g cooked</p>
-            <p><b>Rice:</b> 150–200g cooked</p>
-            <p><b>Curd:</b> 100–150g</p>
-            <p><b>Vegetables:</b> 150–200g</p>
-        </div>
+  if(goal === "gain"){
 
+    goalText =
+      "Muscle Gain: focus on progressive strength training, enough protein and a moderate calorie surplus.";
 
-        <div class="meal">
-            <h3>🥜 Evening Snack</h3>
-            <p><b>Eggs:</b> 2 boiled eggs</p>
-            <p><b>Fruit:</b> 1 serving</p>
-            <p><b>Roasted chana:</b> 30–40g</p>
-        </div>
+  }else if(goal === "loss"){
 
+    goalText =
+      "Fat Loss: maintain a controlled calorie deficit while keeping protein high and strength training consistent.";
 
-        <div class="meal">
-            <h3>🥗 Salad</h3>
-            <p>Cucumber + Tomato + Onion + Lemon</p>
-            <p>Approx. 150–200g vegetables.</p>
-        </div>
+  }else{
 
+    goalText =
+      "Fitness: balanced nutrition, regular resistance training, daily activity and proper recovery.";
+  }
 
-        <div class="meal">
-            <h3>🌙 Dinner</h3>
-            <p><b>Chicken/Fish:</b> 120–150g cooked</p>
-            <p><b>Roti:</b> 2–3</p>
-            <p><b>Vegetables:</b> 150–200g</p>
-        </div>
 
-        `;
-    }
+  document.getElementById("goalText")
+    .innerText =
+    goalText;
 
 
-    document.getElementById("dietPlan").innerHTML =
-        meals;
+  // Diet
+  const breakfast =
+    document.getElementById("breakfast");
 
+  const lunch =
+    document.getElementById("lunch");
 
-    /* WORKOUT */
+  const snack =
+    document.getElementById("snack");
 
-    let workout = `
+  const dinner =
+    document.getElementById("dinner");
 
-    <div class="exercise">
-        <h3>🔥 Day 1 — Chest + Triceps</h3>
-        <p>Bench Press — 4 sets × 8–12 reps</p>
-        <p>Incline Dumbbell Press — 3 × 8–12</p>
-        <p>Cable Fly — 3 × 12–15</p>
-        <p>Triceps Pushdown — 3 × 10–15</p>
-        <p>Overhead Triceps Extension — 3 × 10–12</p>
-        <p><b>Rest:</b> 60–120 sec between sets</p>
-    </div>
 
+  if(diet === "veg"){
 
-    <div class="exercise">
-        <h3>💪 Day 2 — Back + Biceps</h3>
-        <p>Lat Pulldown — 4 × 8–12</p>
-        <p>Seated Cable Row — 3 × 8–12</p>
-        <p>One Arm Dumbbell Row — 3 × 10–12</p>
-        <p>Dumbbell Curl — 3 × 10–12</p>
-        <p>Hammer Curl — 3 × 10–12</p>
-        <p><b>Rest:</b> 60–120 sec</p>
-    </div>
-
-
-    <div class="exercise">
-        <h3>🦵 Day 3 — Legs</h3>
-        <p>Squat — 4 × 6–10</p>
-        <p>Leg Press — 3 × 10–12</p>
-        <p>Leg Curl — 3 × 10–15</p>
-        <p>Leg Extension — 3 × 10–15</p>
-        <p>Calf Raise — 4 × 12–20</p>
-        <p><b>Rest:</b> 90–150 sec</p>
-    </div>
-
-
-    <div class="exercise">
-        <h3>🏋️ Day 4 — Shoulders</h3>
-        <p>Overhead Press — 4 × 8–12</p>
-        <p>Lateral Raise — 4 × 12–15</p>
-        <p>Rear Delt Fly — 3 × 12–15</p>
-        <p>Face Pull — 3 × 12–15</p>
-        <p><b>Rest:</b> 60–120 sec</p>
-    </div>
-
-
-    <div class="exercise">
-        <h3>🔥 Day 5 — Arms</h3>
-        <p>Barbell Curl — 3 × 8–12</p>
-        <p>Incline Dumbbell Curl — 3 × 10–12</p>
-        <p>Close Grip Press — 3 × 8–12</p>
-        <p>Triceps Pushdown — 3 × 10–15</p>
-        <p>Hammer Curl — 3 × 10–12</p>
-        <p><b>Rest:</b> 60–90 sec</p>
-    </div>
-
-
-    <div class="exercise">
-        <h3>⚡ Day 6 — Full Body / Conditioning</h3>
-        <p>Goblet Squat — 3 × 10–15</p>
-        <p>Push-ups — 3 × 10–15</p>
-        <p>Lat Pulldown — 3 × 10–12</p>
-        <p>Dumbbell Row — 3 × 10–12</p>
-        <p>Plank — 3 × 30–60 sec</p>
-        <p><b>Rest:</b> 60–120 sec</p>
-    </div>
-
-
-    <div class="exercise">
-        <h3>😴 Day 7 — Recovery</h3>
-        <p>Light walking, stretching and recovery.</p>
-        <p>Avoid hard training if you are very fatigued.</p>
-    </div>
-
+    breakfast.innerHTML = `
+      <li>Oats — 80 g</li>
+      <li>Milk — 250 ml</li>
+      <li>Banana — 1 medium</li>
+      <li>Peanut Butter — 1 tbsp</li>
+      <li>Chia Seeds — 1 tsp</li>
     `;
 
+    lunch.innerHTML = `
+      <li>Brown/White Rice — 200 g cooked</li>
+      <li>Paneer — 100 g</li>
+      <li>Dal — 1 bowl</li>
+      <li>Mixed Vegetables — 1 bowl</li>
+      <li>Curd — 100 g</li>
+    `;
 
-    document.getElementById("workoutPlan").innerHTML =
-        workout;
+    snack.innerHTML = `
+      <li>Moong Sprouts — 50 g</li>
+      <li>Roasted Chana — 40 g</li>
+      <li>Fruit — 1 serving</li>
+    `;
+
+    dinner.innerHTML = `
+      <li>Paneer — 100 g</li>
+      <li>Chapati — 2–3</li>
+      <li>Mixed Vegetables — 1 bowl</li>
+      <li>Curd — 100 g</li>
+    `;
+
+  }else{
+
+    breakfast.innerHTML = `
+      <li>Oats — 80 g</li>
+      <li>Milk — 250 ml</li>
+      <li>Banana — 1 medium</li>
+      <li>Eggs — 2 whole</li>
+    `;
+
+    lunch.innerHTML = `
+      <li>Rice — 200 g cooked</li>
+      <li>Chicken — 150 g cooked</li>
+      <li>Dal — 1 bowl</li>
+      <li>Mixed Vegetables — 1 bowl</li>
+      <li>Curd — 100 g</li>
+    `;
+
+    snack.innerHTML = `
+      <li>Boiled Eggs — 2</li>
+      <li>Roasted Chana — 40 g</li>
+      <li>Fruit — 1 serving</li>
+    `;
+
+    dinner.innerHTML = `
+      <li>Chicken — 150 g cooked</li>
+      <li>Chapati — 2</li>
+      <li>Mixed Vegetables — 1 bowl</li>
+      <li>Curd — 100 g</li>
+    `;
+  }
 
 
-    /* SHOW RESULT */
+  // Save profile
+  localStorage.setItem(
+    "mishraGymProfile",
+    JSON.stringify({
+      name,
+      age,
+      gender,
+      height,
+      weight,
+      goal,
+      diet,
+      activity
+    })
+  );
 
-    const result =
-        document.getElementById("result");
 
-    result.classList.remove("hidden");
-
-    result.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
+  // Scroll to result
+  document.getElementById("result")
+    .scrollIntoView({
+      behavior:"smooth"
     });
 
 }
+
+
+// Load previous profile
+window.addEventListener("load",function(){
+
+  const saved =
+    localStorage.getItem("mishraGymProfile");
+
+  if(!saved) return;
+
+  try{
+
+    const p =
+      JSON.parse(saved);
+
+    document.getElementById("name").value =
+      p.name || "";
+
+    document.getElementById("age").value =
+      p.age || "";
+
+    document.getElementById("gender").value =
+      p.gender || "male";
+
+    document.getElementById("height").value =
+      p.height || "";
+
+    document.getElementById("weight").value =
+      p.weight || "";
+
+    document.getElementById("goal").value =
+      p.goal || "gain";
+
+    document.getElementById("diet").value =
+      p.diet || "veg";
+
+    document.getElementById("activity").value =
+      p.activity || "1.55";
+
+  }catch(e){
+
+    console.log("Profile loading error");
+  }
+
+});
 
 </script>
 
