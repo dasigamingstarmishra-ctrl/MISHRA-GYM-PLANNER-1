@@ -8,10 +8,11 @@ on:
 
 jobs:
   build:
-    name: Build Android APK
+    name: Build Mishra Gym Planner APK
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -33,12 +34,7 @@ jobs:
         run: |
           mkdir -p app/src/main/java/com/mishragym/planner
           mkdir -p app/src/main/res/values
-          mkdir -p app/src/main/res/drawable
-          mkdir -p app/src/main/res/mipmap-hdpi
-          mkdir -p app/src/main/res/mipmap-mdpi
-          mkdir -p app/src/main/res/mipmap-xhdpi
-          mkdir -p app/src/main/res/mipmap-xxhdpi
-          mkdir -p app/src/main/res/mipmap-xxxhdpi
+          mkdir -p app/src/main/assets
 
       - name: Create settings.gradle
         run: |
@@ -104,19 +100,22 @@ jobs:
           cat > app/src/main/AndroidManifest.xml <<'EOF'
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+              <uses-permission android:name="android.permission.INTERNET"/>
+
               <application
                   android:theme="@style/AppTheme"
                   android:label="Mishra Gym Planner"
                   android:allowBackup="true"
-                  android:supportsRtl="true">
+                  android:supportsRtl="true"
+                  android:usesCleartextTraffic="true">
 
                   <activity
                       android:name=".MainActivity"
                       android:exported="true">
 
                       <intent-filter>
-                          <action android:name="android.intent.action.MAIN" />
-                          <category android:name="android.intent.category.LAUNCHER" />
+                          <action android:name="android.intent.action.MAIN"/>
+                          <category android:name="android.intent.category.LAUNCHER"/>
                       </intent-filter>
 
                   </activity>
@@ -130,15 +129,30 @@ jobs:
         run: |
           cat > app/src/main/res/values/styles.xml <<'EOF'
           <resources>
-              <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+
+              <style
+                  name="AppTheme"
+                  parent="android:style/Theme.Material.Light.NoActionBar">
+
                   <item name="android:fontFamily">sans</item>
                   <item name="android:colorAccent">#00A86B</item>
-                  <item name="android:navigationBarColor">#FFFFFF</item>
                   <item name="android:statusBarColor">#FFFFFF</item>
+                  <item name="android:navigationBarColor">#FFFFFF</item>
                   <item name="android:windowLightStatusBar">true</item>
+
               </style>
+
           </resources>
           EOF
+
+      - name: Copy index.html into APK
+        run: |
+          if [ ! -f index.html ]; then
+            echo "ERROR: index.html not found in repository root."
+            exit 1
+          fi
+
+          cp index.html app/src/main/assets/index.html
 
       - name: Create MainActivity.java
         run: |
@@ -147,41 +161,45 @@ jobs:
 
           import android.app.Activity;
           import android.os.Bundle;
-          import android.graphics.Color;
-          import android.view.Gravity;
-          import android.widget.LinearLayout;
-          import android.widget.TextView;
+          import android.webkit.WebSettings;
+          import android.webkit.WebView;
+          import android.webkit.WebViewClient;
 
           public class MainActivity extends Activity {
+
+              private WebView webView;
 
               @Override
               protected void onCreate(Bundle savedInstanceState) {
                   super.onCreate(savedInstanceState);
 
-                  LinearLayout layout = new LinearLayout(this);
-                  layout.setOrientation(LinearLayout.VERTICAL);
-                  layout.setGravity(Gravity.CENTER);
-                  layout.setPadding(30, 30, 30, 30);
-                  layout.setBackgroundColor(Color.WHITE);
+                  webView = new WebView(this);
+                  setContentView(webView);
 
-                  TextView title = new TextView(this);
-                  title.setText("MISHRA GYM PLANNER");
-                  title.setTextSize(26);
-                  title.setTextColor(Color.BLACK);
-                  title.setGravity(Gravity.CENTER);
+                  WebSettings settings = webView.getSettings();
 
-                  TextView subtitle = new TextView(this);
-                  subtitle.setText(
-                      "\nYour personalized Diet & Workout Planner\n\n" +
-                      "APK Build Successful ✅"
+                  settings.setJavaScriptEnabled(true);
+                  settings.setDomStorageEnabled(true);
+                  settings.setAllowFileAccess(true);
+                  settings.setAllowContentAccess(true);
+                  settings.setBuiltInZoomControls(false);
+                  settings.setDisplayZoomControls(false);
+
+                  webView.setWebViewClient(new WebViewClient());
+
+                  webView.loadUrl(
+                      "file:///android_asset/index.html"
                   );
-                  subtitle.setTextSize(18);
-                  subtitle.setGravity(Gravity.CENTER);
+              }
 
-                  layout.addView(title);
-                  layout.addView(subtitle);
+              @Override
+              public void onBackPressed() {
 
-                  setContentView(layout);
+                  if (webView.canGoBack()) {
+                      webView.goBack();
+                  } else {
+                      super.onBackPressed();
+                  }
               }
           }
           EOF
@@ -193,7 +211,8 @@ jobs:
           echo "$PWD/gradle-8.9/bin" >> $GITHUB_PATH
 
       - name: Build APK
-        run: gradle assembleDebug --stacktrace
+        run: |
+          gradle assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
